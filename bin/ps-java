@@ -1,0 +1,24 @@
+#!/bin/bash
+
+JAVA_HOME=/usr/lib/jvm/java-13-openjdk-amd64
+JAVA_EXE="$JAVA_HOME/bin/java"
+
+JVM_OPTS="$JVM_OPTS -server"
+JVM_OPTS="$JVM_OPTS -XX:-TieredCompilation"
+JVM_OPTS="$JVM_OPTS -XX:-UseBiasedLocking"
+JVM_OPTS="$JVM_OPTS -XX:+UseConcMarkSweepGC"
+JVM_OPTS="$JVM_OPTS -XX:+CMSParallelRemarkEnabled"
+JVM_OPTS="$JVM_OPTS -XX:SurvivorRatio=8"
+JVM_OPTS="$JVM_OPTS -XX:MaxTenuringThreshold=1"
+JVM_OPTS="$JVM_OPTS -XX:CMSInitiatingOccupancyFraction=75"
+JVM_OPTS="$JVM_OPTS -XX:+UseCMSInitiatingOccupancyOnly"
+JVM_OPTS="$JVM_OPTS -XX:CMSWaitDuration=10000"
+JVM_OPTS="$JVM_OPTS -XX:+CMSParallelInitialMarkEnabled"
+JVM_OPTS="$JVM_OPTS -XX:+CMSEdenChunksRecordAlways"
+JVM_OPTS="$JVM_OPTS -Xlog:gc*,safepoint=info:file=/tmp/jvm.log::filecount=0,filesize=128m"
+JVM_OPTS="$JVM_OPTS -Xms4g"
+JVM_OPTS="$JVM_OPTS -Xmx4g"
+
+$JAVA_EXE $JVM_OPTS $*
+
+

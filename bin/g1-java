@@ -1,0 +1,21 @@
+#!/bin/bash
+
+JAVA_HOME=/usr/lib/jvm/java-13-openjdk-amd64
+JAVA_EXE="$JAVA_HOME/bin/java"
+
+JVM_OPTS="$JVM_OPTS -server"
+JVM_OPTS="$JVM_OPTS -XX:-TieredCompilation"
+JVM_OPTS="$JVM_OPTS -XX:-UseBiasedLocking"
+JVM_OPTS="$JVM_OPTS -Xlog:gc*,safepoint=info:file=/tmp/jvm.log::filecount=0,filesize=128m"
+JVM_OPTS="$JVM_OPTS -Xms4g"
+JVM_OPTS="$JVM_OPTS -Xmx4g"
+JVM_OPTS="$JVM_OPTS -XX:MaxGCPauseMillis=100"
+JVM_OPTS="$JVM_OPTS -XX:+UseG1GC"
+JVM_OPTS="$JVM_OPTS -XX:G1HeapRegionSize=32m"
+JVM_OPTS="$JVM_OPTS -XX:G1RSetUpdatingPauseTimePercent=10"
+JVM_OPTS="$JVM_OPTS -XX:InitiatingHeapOccupancyPercent=50"
+JVM_OPTS="$JVM_OPTS -XX:G1HeapWastePercent=25"
+JVM_OPTS="$JVM_OPTS -XX:ConcGCThreads=16"
+JVM_OPTS="$JVM_OPTS -XX:ParallelGCThreads=16"
+
+$JAVA_EXE $JVM_OPTS $*

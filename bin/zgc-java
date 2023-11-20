@@ -1,0 +1,16 @@
+#!/bin/bash
+
+JAVA_HOME=/usr/lib/jvm/java-13-openjdk-amd64
+JAVA_EXE="$JAVA_HOME/bin/java"
+
+JVM_OPTS="$JVM_OPTS -server"
+JVM_OPTS="$JVM_OPTS -XX:-TieredCompilation"
+JVM_OPTS="$JVM_OPTS -XX:-UseBiasedLocking"
+JVM_OPTS="$JVM_OPTS -XX:+UnlockExperimentalVMOptions"
+JVM_OPTS="$JVM_OPTS -XX:+UseZGC"
+JVM_OPTS="$JVM_OPTS -XX:ConcGCThreads=8"
+JVM_OPTS="$JVM_OPTS -Xms4g"
+JVM_OPTS="$JVM_OPTS -Xmx4g"
+JVM_OPTS="$JVM_OPTS -Xlog:gc*,safepoint=info:file=/tmp/jvm.log::filecount=0,filesize=128m"
+
+$JAVA_EXE $JVM_OPTS $*
